@@ -1,6 +1,6 @@
 package com.android.scenicexplorer;
 
-
+import android.content.Context;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.graphics.Color;
@@ -8,10 +8,14 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     private HomeFragment homeFragment;
     private FindFragment findFragment;
@@ -33,6 +37,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView routeText;
     private TextView myText;
 
+    private Spinner spin_one;
+    private Context mContext;
+    //判断是否为刚进去时触发onItemSelected的标志
+    private boolean one_selected = false;
+    private BaseAdapter myAdadpter = null;
+
     private FragmentManager fragmentManager;
 
     @Override
@@ -41,6 +51,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
         initView();
+        mContext = MainActivity.this;
+        bindViews();
         fragmentManager = getSupportFragmentManager();
         setTabSelection(0);
     }
@@ -58,12 +70,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findText = (TextView) findViewById(R.id.find_text);
         routeText = (TextView) findViewById(R.id.route_text);
         myText = (TextView) findViewById(R.id.my_text);
+        spin_one = (Spinner) findViewById(R.id.spin_one);
         homeLayout.setOnClickListener(this);
         findLayout.setOnClickListener(this);
         routeLayout.setOnClickListener(this);
         myLayout.setOnClickListener(this);
     }
+    private void bindViews() {
+        spin_one.setOnItemSelectedListener(this);
+    }
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        switch (parent.getId()){
+            case R.id.spin_one:
+                if(one_selected){
+                    Toast.makeText(mContext,"您选择的是~：" + parent.getItemAtPosition(position).toString(),
+                            Toast.LENGTH_SHORT).show();
+                }else one_selected = true;
+                break;
+        }
+    }
 
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -190,5 +221,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             transaction.hide(myFragment);
         }
     }
+/*
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
 
+    }*/
 }

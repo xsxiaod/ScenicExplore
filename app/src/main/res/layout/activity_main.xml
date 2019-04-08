@@ -3,6 +3,37 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:orientation="horizontal"
+        android:background="@color/colorSearch" >
+        <!--    android:src="@mipmap/iv_lol_icon1"-->
+
+        <Spinner
+            android:id="@+id/spin_one"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:entries="@array/data"/>
+
+        <SearchView
+            android:id="@+id/searchView"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="7dp"
+            android:layout_weight="4"
+            android:iconifiedByDefault="false"
+            android:imeOptions="actionSearch"
+            android:queryHint="搜索内容"
+            android:background="#FFFFFF"/>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="返回"/>
+    </LinearLayout>
 
     <FrameLayout
         android:id="@+id/content"
