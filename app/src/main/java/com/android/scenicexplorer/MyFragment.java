@@ -10,7 +10,6 @@ public class MyFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View myLayout =  inflater.inflate(R.layout.my_layout,container,false);
-
         return myLayout;
     }
 }
