@@ -13,13 +13,13 @@
         android:gravity="center">
 
         <Button
-            android:id="@+id/btn1"
+            android:id="@+id/login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@drawable/route_btn1"
+            android:background="@drawable/route_login"
             android:text="@string/login"
-            android:textColor="@color/route_btn1"
+            android:textColor="@color/route_login"
             android:textSize="20sp" />
     </LinearLayout>
 
