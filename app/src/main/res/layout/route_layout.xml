@@ -19,7 +19,7 @@
             android:layout_gravity="center"
             android:background="@drawable/route_btn1"
             android:text="@string/login"
-            android:textColor="#BFDBE7"
+            android:textColor="@color/route_btn1"
             android:textSize="20sp" />
     </LinearLayout>
 
