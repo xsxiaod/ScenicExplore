@@ -1,10 +1,10 @@
 package com.android.scenicexplorer;
 
 import android.content.Context;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         bindViews();
         fragmentManager = getSupportFragmentManager();
         setTabSelection(0);
+
     }
 
     private void initView() {
@@ -121,8 +122,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
     /**
      * 根据传入的index参数来设置选中的tab页。
-     *
-     * @param index
      * 每个tab页对应的下标。0表示消息，1表示联系人，2表示动态，3表示设置。
      */
     private void setTabSelection(int index) {
@@ -203,9 +202,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     /**
      * 将所有的Fragment都置为隐藏状态。
-     *
-     * @param transaction
-     *            用于对Fragment执行操作的事务
+     *  用于对Fragment执行操作的事务
      */
     private void hideFragments(FragmentTransaction transaction) {
         if (homeFragment != null) {

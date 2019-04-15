@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
@@ -18,18 +20,23 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by Administrator on 2016/7/13.
+ * Created by sxd on 2019/3/28.
  */
 public class HomeFragment extends Fragment {
-
     private View mView;
     private ViewPager mViewPaper;
     private List<ImageView> images;
     private List<View> dots;
     private int currentItem;
+
+    private ImageView strategy;
+    private ImageView ticket;
+    private ImageView surround;
+    private ImageView answer;
+    private ImageView more;
+
     //记录上一次点的位置
     private int oldPosition = 0;
-
     //存放图片的id
     private int[] imageIds = new int[]{
             R.drawable.timg,
@@ -54,9 +61,51 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
          mView =  inflater.inflate(R.layout.home_layout,container,false);
+        more = (ImageView)mView.findViewById(R.id.more);
         setView();
+        initView();
         return mView;
+
     }
+
+    private void initView() {
+        strategy = (ImageView)mView.findViewById(R.id.strategy);
+        ticket = (ImageView)mView.findViewById(R.id.ticket);
+        surround = (ImageView)mView.findViewById(R.id.surround);
+        answer = (ImageView)mView.findViewById(R.id.answer);
+        more = (ImageView)mView.findViewById(R.id.more);
+
+        strategy.setOnClickListener(mylistener);
+        ticket.setOnClickListener(mylistener);
+        surround.setOnClickListener(mylistener);
+        answer.setOnClickListener(mylistener);
+        more.setOnClickListener(mylistener);
+
+    }
+    View.OnClickListener mylistener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()){
+                case R.id.strategy:
+                    Toast.makeText(getContext(),"You Click 1:" + toString(),Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.ticket:
+                    Toast.makeText(getContext(),"You Click 2:" + toString(),Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.surround:
+                    Toast.makeText(getContext(),"You Click 3:" + toString(),Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.answer:
+                    Toast.makeText(getContext(),"You Click 4:" + toString(),Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.more:
+                    Toast.makeText(getContext(),"You Click 5:" + toString(),Toast.LENGTH_SHORT).show();
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
     private void setView(){
         mViewPaper = (ViewPager)mView.findViewById(R.id.vp);
 
@@ -90,32 +139,25 @@ public class HomeFragment extends Fragment {
                 oldPosition = position;
                 currentItem = position;
             }
-
             @Override
             public void onPageScrolled(int arg0, float arg1, int arg2) {
-
             }
-
             @Override
             public void onPageScrollStateChanged(int arg0) {
 
             }
         });
     }
-
     /*定义的适配器*/
     public class ViewPagerAdapter extends PagerAdapter{
-
         @Override
         public int getCount() {
             return images.size();
         }
-
         @Override
         public boolean isViewFromObject(View arg0, Object arg1) {
             return arg0 == arg1;
         }
-
         @Override
         public void destroyItem(ViewGroup view, int position, Object object) {
             // TODO Auto-generated method stub
@@ -124,7 +166,6 @@ public class HomeFragment extends Fragment {
 //          view.removeViewAt(position);
             view.removeView(images.get(position));
         }
-
         @Override
         public Object instantiateItem(ViewGroup view, int position) {
             // TODO Auto-generated method stub
@@ -133,7 +174,6 @@ public class HomeFragment extends Fragment {
         }
 
     }
-
     /**
      * 利用线程池定时执行动画轮播
      */
@@ -148,12 +188,9 @@ public class HomeFragment extends Fragment {
                 2,
                 TimeUnit.SECONDS);
     }
-
-
     /**
      * 图片轮播任务
-     * @author liuyazhuang
-     *
+     * @author sxd
      */
     private class ViewPageTask implements Runnable{
 
@@ -163,7 +200,6 @@ public class HomeFragment extends Fragment {
             mHandler.sendEmptyMessage(0);
         }
     }
-
     /**
      * 接收子线程传递过来的数据
      */
